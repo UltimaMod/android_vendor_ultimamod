@@ -139,7 +139,8 @@ repackROM () {
     cp vendor/ultimamod/prebuilt/common/xbin/ARCHIDROID_INIT $OUTMOD/system/xbin/ARCHIDROID_INIT 
 
     # Zip back up
-    ZIPNAME=UltimaMod-${ULTIMAMOD_BUILD_VERSION}-v${ULTIMAMOD_VERSION_MAJOR}.${ULTIMAMOD_VERSION_MINOR}-${DEVICE}.zip
+    ZIPNAME=UltimaMod-${ULTIMAMOD_BUILD_VERSION}-v${ULTIMAMOD_VERSION_MAJOR}.${ULTIMAMOD_VERSION_MINOR}-${DEVICE}-${DISTTYPE}.zip
+    rm out/$ZIPNAME
     $SEVENZIP a -r -mx9 -tzip out/$ZIPNAME ./$OUTMOD/*
     md5sum out/$ZIPNAME > out/${ZIPNAME}.md5
 
