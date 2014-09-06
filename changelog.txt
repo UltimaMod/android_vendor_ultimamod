@@ -1,3 +1,3 @@
-<b><#selectbg_g>UltimaROM - v17.3 Diablos</#></b>
-<*>Enabled all three camera's to be installed at once</*>
-<*>Samsung camera now works with AOSP gallery</*>
+<b><#selectbg_g>UltimaMod - v2.0 Folkvangr</#></b>
+<*>Changed base to CyanogenMod - Should make for quicker updates</*>
+<*>Added call recording as default for all devices (Cyanogen limit this per region, which is unnecessary)</*>

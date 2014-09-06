@@ -1,18 +1,17 @@
 #! /bin/bash
 
 # UltimaMod Variables
-ULTIMAMOD_ROMNAME=ULTIMAMOD
-ULTIMAMOD_BUILD_VERSION=Valhalla
+ULTIMAMOD_ROMNAME=UltimaMod
+ULTIMAMOD_BUILD_VERSION=Folkvangr
 ULTIMAMOD_VERSION_MAJOR=2
 ULTIMAMOD_VERSION_MINOR=0
 ULTIMAMOD_UPDATE_URL=http://www.ultimarom.com/rom/update/update_manifest.xml
 
 DISTTYPE=
 DEVICE=
-SEVENZIP=vendor/ultimamod/tools/7za
-AROMAFOLDER=vendor/ultimamod/aroma
+VENDOR=vendor/ultimamod
+SEVENZIP=$VENDOR/tools/7za
 NOW=$(date +"%Y%m%d")
-OUTMOD=out/UltimaMod
 CMVER=11
 
 buildROM () { 
@@ -30,19 +29,22 @@ repackROM () {
     rm -rf $OUTMOD/*
 
     # Copy system files
-    cp -r out/target/product/$DEVICE/system $OUTMOD/system
-    cp out/target/product/$DEVICE/boot.img $OUTMOD
+    echo "Extracting CyanogenMod files"
+    LATESTZIP=$(ls -t ${OUTFOLDER}/ | grep -e "cm-$CMVER.*\.zip" | cut -d. -f1 | head -n1)
+    $SEVENZIP x -o$OUTMOD $OUTFOLDER/${LATESTZIP}.zip > /dev/null
 
     # Delete some unnecessary files
     rm -rf $OUTMOD/META-INF $OUTMOD/recovery
 
+    echo "Copying UltimaMod files"
+
     # Copy in AROMA files
-    cp -a $AROMAFOLDER/META-INF $OUTMOD/META-INF
-    cp -a $AROMAFOLDER/overlay/$DEVICE/. $OUTMOD
-    cp -a $AROMAFOLDER/ultima $OUTMOD/ultima
-    cp -a vendor/ultimamod/changelog.txt $OUTMOD/META-INF/com/google/android/aroma
-    cp -a vendor/ultimamod/license.txt $OUTMOD/META-INF/com/google/android/aroma
-    cp -a vendor/ultimamod/notes.txt $OUTMOD/META-INF/com/google/android/aroma
+    cp -a $VENDOR/aroma/META-INF $OUTMOD/META-INF
+    cp -a $VENDOR/aroma/overlay/$DEVICE/. $OUTMOD
+    cp -a $VENDOR/aroma/ultima $OUTMOD/ultima
+    cp -a $VENDOR/changelog.txt $OUTMOD/META-INF/com/google/android/aroma
+    cp -a $VENDOR/license.txt $OUTMOD/META-INF/com/google/android/aroma
+    cp -a $VENDOR/notes.txt $OUTMOD/META-INF/com/google/android/aroma
 
     # Move over optional files
     ## Live Wallpapers
@@ -64,11 +66,11 @@ repackROM () {
     ## Boot animation
     mv $OUTMOD/system/media/bootanimation.zip $OUTMOD/ultima/bootanimation/cyan
     if [ "$DEVICE" == "jflte" ]; then
-        cp vendor/ultimamod/prebuilt/common/bootanimation/stock/BOOTANIMATION-1920x1080.zip $OUTMOD/ultima/bootanimation/stock/bootanimation.zip
-        cp vendor/ultimamod/prebuilt/common/bootanimation/l_preview/BOOTANIMATION-1920x1080.zip $OUTMOD/ultima/bootanimation/l_preview/bootanimation.zip
+        cp $VENDOR/prebuilt/common/bootanimation/stock/BOOTANIMATION-1920x1080.zip $OUTMOD/ultima/bootanimation/stock/bootanimation.zip
+        cp $VENDOR/prebuilt/common/bootanimation/l_preview/BOOTANIMATION-1920x1080.zip $OUTMOD/ultima/bootanimation/l_preview/bootanimation.zip
     else
-        cp vendor/ultimamod/prebuilt/common/bootanimation/stock/BOOTANIMATION-1280x720.zip $OUTMOD/ultima/bootanimation/stock/bootanimation.zip
-        cp vendor/ultimamod/prebuilt/common/bootanimation/l_preview/BOOTANIMATION-1280x720.zip $OUTMOD/ultima/bootanimation/l_preview/bootanimation.zip
+        cp $VENDOR/prebuilt/common/bootanimation/stock/BOOTANIMATION-1280x720.zip $OUTMOD/ultima/bootanimation/stock/bootanimation.zip
+        cp $VENDOR/prebuilt/common/bootanimation/l_preview/BOOTANIMATION-1280x720.zip $OUTMOD/ultima/bootanimation/l_preview/bootanimation.zip
     fi
 
     # Make specific alterations
@@ -134,15 +136,15 @@ repackROM () {
 
     ## ArchiDroid INIT and debuggerd
     mv $OUTMOD/system/bin/debuggerd $OUTMOD/system/bin/debuggerd.real
-    cp vendor/ultimamod/prebuilt/common/bin/debuggerd $OUTMOD/system/bin/debuggerd
-    cp -R vendor/ultimamod/prebuilt/common/ultimamod $OUTMOD/system/ultimamod
-    cp vendor/ultimamod/prebuilt/common/xbin/ARCHIDROID_INIT $OUTMOD/system/xbin/ARCHIDROID_INIT 
+    cp $VENDOR/prebuilt/common/bin/debuggerd $OUTMOD/system/bin/debuggerd
+    cp -R $VENDOR/prebuilt/common/ultimamod $OUTMOD/system/ultimamod
+    cp $VENDOR/prebuilt/common/xbin/ARCHIDROID_INIT $OUTMOD/system/xbin/ARCHIDROID_INIT 
 
     # Zip back up
-    ZIPNAME=UltimaMod-${ULTIMAMOD_BUILD_VERSION}-v${ULTIMAMOD_VERSION_MAJOR}.${ULTIMAMOD_VERSION_MINOR}-${DEVICE}-${DISTTYPE}.zip
-    rm out/$ZIPNAME
-    $SEVENZIP a -r -mx9 -tzip out/$ZIPNAME ./$OUTMOD/*
-    md5sum out/$ZIPNAME > out/${ZIPNAME}.md5
+    rm $OUTFOLDER/$ZIPNAME
+    echo "Creating ROM zip"
+    $SEVENZIP a -r -mx9 -tzip $OUTFOLDER/$ZIPNAME ./$OUTMOD/* > /dev/null
+    md5sum $OUTFOLDER/{$ZIPNAME} > $OUTFOLDER/{$ZIPNAME}.md5
 
     echo -e "\e[1;91mYou can find your ROM zip in the out folder"
     echo -e "\e[0m "
@@ -151,6 +153,11 @@ repackROM () {
 runLunch() {
     # Lunch using our selection
     lunch cm_$DEVICE-$DISTTYPE
+
+    # UltimaMod variables
+    OUTFOLDER=out/target/product/$DEVICE
+    OUTMOD=$OUTFOLDER/ultimamod
+    ZIPNAME=UltimaMod-${ULTIMAMOD_BUILD_VERSION}-v${ULTIMAMOD_VERSION_MAJOR}.${ULTIMAMOD_VERSION_MINOR}-${DEVICE}-${DISTTYPE}.zip
 
     # Delete the any existing ones, so that if the build fails, so does the repack
     rm -rf $OUTZIP

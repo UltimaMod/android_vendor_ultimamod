@@ -1,4 +1,4 @@
-<@center><b><#selectbg_g>UltimaROM TERMS & CONDITIONS</#></b>
+<@center><b><#selectbg_g>UltimaMod TERMS & CONDITIONS</#></b>
 Version 17.0, July 2014
 
 <b><#selectbg_g>TERMS AND CONDITIONS FOR USE</#></b></@>
@@ -17,10 +17,7 @@ I hope you enjoy this!
 
 <#selectbg_g><b>Thanks/Credits</b></#>
 <*>JustArchi - A lot of things. Just, seriously. A lot. You're the man.</*>
-<*>ficeto - CustomSettings (UltimaControl)</*>
-<*>djembey - HD-Voice </*>
-<*>AOKP - Wallpapers App</*>
-<*>Crussader - Most AOSP Theming</*>
+<*>CyanogenMod</*>
 
 <#selectbg_g><b>Big Thanks to Donators!</b></#>
 
