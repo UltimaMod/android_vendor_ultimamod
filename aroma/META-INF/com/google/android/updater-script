@@ -520,7 +520,19 @@ ui_print("@Settings Permissions...");
         delete("/tmp/disableroot.sh");        
     endif;
 
-##################### KERNEL INSTALL ##################
+###################################### RUNTIME #######################################
+
+    if file_getprop("/tmp/aroma-data/install.prop","runtime") == "art" then
+        ui_print("Enabling ART...");
+        package_extract_file("ultima/scripts/enableart.sh", "/tmp/enableart.sh");
+        set_perm(0, 0, 0755, "/tmp/enableart.sh");
+        run_program("/tmp/enableart.sh");
+        delete("/tmp/enableart.sh");
+    else
+        ui_print("Enabling Dalvik...");
+    endif;
+
+################################## KERNEL INSTALL  ###################################
 
 ui_print("@Installing Kernel...");
 	ui_print("Flashing CyanogenMod Kernel...");

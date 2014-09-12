@@ -156,6 +156,10 @@ textbox(
 			"supersu",				"SuperSU",				"Chainfire's Superuser implementation <#ff4444>(RECOMMENDED)</#>",					"select.selected",
 			"superuser",			"Superuser",			"Koush's Superuser implementation (stock CyanogenMod)",								"select",
 			"none",					"None",					"Do not install root",																"select",
+
+			"runtime",				"<#selectbg_g>Runtime</#>","", 																				"group",
+			"art",					"ART",					"Enable ART <#ff4444>(EXPERIMENTAL!! - First boot may take longer)</#>",			"select",
+			"dalvik",				"Dalvik",				"Enable Dalvik",																	"select.selected",
 			
 			"launcher",				"<#selectbg_g>Launchers</#>","",																			"group",
 			"stock",				"Trebuchet", 			"Stock CyanogenMod Launcher <#ff4444>(RECOMMENDED)</#>",							"select.selected",
