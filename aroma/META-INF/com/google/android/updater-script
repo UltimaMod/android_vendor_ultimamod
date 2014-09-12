@@ -186,23 +186,23 @@ ui_print("@Installing System...");
         package_extract_dir("ultima/apps/gapps/lite", "/system");
 
     	if file_getprop("/tmp/aroma-data/gapps.prop","books") == "1" then
-            package_extract_dir("ultima/apps/gapps/books", "/data");
+            package_extract_dir("ultima/apps/gapps/books", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","calendar") == "1" then
-            package_extract_dir("ultima/apps/gapps/calendar", "/data");
+            package_extract_dir("ultima/apps/gapps/calendar", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","chrome") == "1" then
-            package_extract_dir("ultima/apps/gapps/chrome", "/data");
+            package_extract_dir("ultima/apps/gapps/chrome", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","print") == "1" then
-            package_extract_dir("ultima/apps/gapps/print", "/data");
+            package_extract_dir("ultima/apps/gapps/print", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","manager") == "1" then
-            package_extract_dir("ultima/apps/gapps/manager", "/data");
+            package_extract_dir("ultima/apps/gapps/manager", "/system");
         endif;
     	
     	if file_getprop("/tmp/aroma-data/gapps.prop","docs") == "1" then
@@ -214,7 +214,7 @@ ui_print("@Installing System...");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","ears") == "1" then
-            package_extract_dir("ultima/apps/gapps/ears", "/data");
+            package_extract_dir("ultima/apps/gapps/ears", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","games") == "1" then
@@ -227,31 +227,31 @@ ui_print("@Installing System...");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","mail") == "1" then
-            package_extract_dir("ultima/apps/gapps/mail", "/data");
+            package_extract_dir("ultima/apps/gapps/mail", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","hangouts") == "1" then
-            package_extract_dir("ultima/apps/gapps/hangouts", "/data");
+            package_extract_dir("ultima/apps/gapps/hangouts", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","keep") == "1" then
-            package_extract_dir("ultima/apps/gapps/keep", "/data");
+            package_extract_dir("ultima/apps/gapps/keep", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","maps") == "1" then
-            package_extract_dir("ultima/apps/gapps/maps", "/data");
+            package_extract_dir("ultima/apps/gapps/maps", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","music") == "1" then
-            package_extract_dir("ultima/apps/gapps/music", "/data");
+            package_extract_dir("ultima/apps/gapps/music", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","news") == "1" then
-            package_extract_dir("ultima/apps/gapps/news", "/data");
+            package_extract_dir("ultima/apps/gapps/news", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","news_weather") == "1" then
-            package_extract_dir("ultima/apps/gapps/weather", "/data");
+            package_extract_dir("ultima/apps/gapps/weather", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","plus") == "1" then
@@ -259,7 +259,7 @@ ui_print("@Installing System...");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","office") == "1" then
-            package_extract_dir("ultima/apps/gapps/office", "/data");
+            package_extract_dir("ultima/apps/gapps/office", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","sheets") == "1" then
@@ -271,23 +271,23 @@ ui_print("@Installing System...");
         endif;
     	
         if file_getprop("/tmp/aroma-data/gapps.prop","translate") == "1" then
-            package_extract_dir("ultima/apps/gapps/translate", "/data");
+            package_extract_dir("ultima/apps/gapps/translate", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","videos") == "1" then
-            package_extract_dir("ultima/apps/gapps/videos", "/data");
+            package_extract_dir("ultima/apps/gapps/videos", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","voice") == "1" then
-            package_extract_dir("ultima/apps/gapps/voice", "/data");
+            package_extract_dir("ultima/apps/gapps/voice", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","wallet") == "1" then
-            package_extract_dir("ultima/apps/gapps/wallet", "/data");
+            package_extract_dir("ultima/apps/gapps/wallet", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","youtube") == "1" then
-            package_extract_dir("ultima/apps/gapps/youtube", "/data");
+            package_extract_dir("ultima/apps/gapps/youtube", "/system");
         endif;
 
     	if file_getprop("/tmp/aroma-data/calendar.prop","calendar") == "yes" then
