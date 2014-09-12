@@ -185,7 +185,6 @@ textbox(
 			"lwp",					"<#selectbg_g>Live Wallpapers</#>","",																		"group",
 			"bubbles",				"Bubbles", 				"",																					"check.checked",
 			"deepsea",				"Deep Sea", 			"",																					"check.checked",
-			"grass",				"Grass", 				"",																					"check.checked",
 			"holo_spiral",			"Holo Spiral", 			"",																					"check.checked",
 			"luminousdots",			"Luminous Dots", 		"",																					"check.checked",
 			"microbes",				"Microbes", 			"",																					"check.checked",

@@ -117,10 +117,6 @@ ui_print("@Installing System...");
         package_extract_dir("ultima/live_wallpapers/deepsea", "/system");
     endif;
 	
-	if file_getprop("/tmp/aroma-data/install.prop","grass") == "1" then
-        package_extract_dir("ultima/live_wallpapers/grass", "/system");
-    endif;
-	
 	 if file_getprop("/tmp/aroma-data/install.prop","holo_spiral") == "1" then
         package_extract_dir("ultima/live_wallpapers/holo_spiral", "/system");
     endif;
