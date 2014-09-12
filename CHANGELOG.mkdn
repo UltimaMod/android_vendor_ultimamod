@@ -1,0 +1,21 @@
+UltimaMod
+===============
+
+Visit http://github.com/UltimaMod for full source and git access.
+
+Visit http://ultimarom.com for downloads, information and themed Google apps packages
+
+CHANGELOG 
+---------
+
+### UltimaMod - v2.0 Folkvangr
+* Changed base to CyanogenMod 11 - Should make for quicker updates
+* Added Gapps packages in the installer. Many options. Full, lite or custom
+* Added call recording as default for all devices (Cyanogen limit this per region, which is unnecessary)
+* Added Traffic Meter and controls to SystemUI
+* Added Recents panel controls (Clear all button position and RAM bar)
+* Added clock option: AM/PM indicator, colour and day of week
+* Added F-Droid option in the installer, for those who don't want Google Apps.
+* Added DisconnectMobile option in the installer
+* Added root options in the installer, including none
+* Added Runtime choice in installer
