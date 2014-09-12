@@ -424,6 +424,7 @@ fi
 for HSPATH in "/cache" "/preload" "/storage/sdcard1"; do
 	if [ -f "$HSPATH/Ultima.swp" ]; then
 		echo "INFO: Found UltimaROM swap file in $HSPATH directory, $(busybox du -mh "$HSPATH/Ultima.swp" | cut -f1)" >> "$LOG"
+		mount -o remount,rw "$HSPATH"
 		busybox swapon $HSEXTRA "$HSPATH/Ultima.swp" # Yes, we must break on spaces in this case
 	fi
 done

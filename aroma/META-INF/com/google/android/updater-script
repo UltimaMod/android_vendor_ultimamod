@@ -37,7 +37,7 @@ ui_print("@Mounting and Formatting Devices...");
 	delete_recursive("/preload");  		
 	delete_recursive("/cache"); 
 
-	show_progress(1.0, 2400);
+	show_progress(1.0, 1575);
 
 ########################## INSTALL SYSTEM #####################	
 	
@@ -73,11 +73,13 @@ ui_print("@Installing System...");
       ui_print("Installing Google Experience Launcher");
 	  package_extract_dir("ultima/launchers/google", "/system");
 	  delete("/system/priv-app/Trebuchet.apk");
+      delete("/system/app/CMHome.apk");
     endif;	
 	if file_getprop("/tmp/aroma-data/install.prop","launcher") == "nova" then
       ui_print("Installing Nova Launcher");
 	  package_extract_dir("ultima/launchers/nova", "/system");
 	  delete("/system/priv-app/Trebuchet.apk");
+      delete("/system/app/CMHome.apk");
     endif;
 
 # Cameras
@@ -155,12 +157,12 @@ ui_print("@Installing System...");
 	
 	if file_getprop("/tmp/aroma-data/install.prop","adaway") == "1" then
 		ui_print("Installing AdAway");
-        package_extract_dir("ultima/apps/misc/adaway", "/data");
+        package_extract_dir("ultima/apps/misc/adaway", "/system");
     endif;
 
     if file_getprop("/tmp/aroma-data/install.prop","disconnect") == "1" then
         ui_print("Installing DisconnectMobile");
-        package_extract_dir("ultima/apps/misc/disconnect", "/data");
+        package_extract_dir("ultima/apps/misc/disconnect", "/system");
     endif;
 	
 	if file_getprop("/tmp/aroma-data/install.prop","dropbox") == "1" then
@@ -525,6 +527,8 @@ ui_print("@Installing Kernel...");
 	
 	
 ################################## CREATE HARDSWAP ###################################
+
+set_progress(1.0);
 
 ui_print("@Installing Swap...");	
 	ui_print("Creating Hardswap...");
