@@ -8,7 +8,6 @@ PRODUCT_COPY_FILES += \
 
 # Required UltimaAOSP Packages
 PRODUCT_PACKAGES += \
-    UltimaControl \
     UltimaWallpapers 
 
 # Live wallpapers
