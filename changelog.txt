@@ -8,3 +8,4 @@
 <*>Added F-Droid option in the installer, for those who don't want Google Apps.</*>
 <*>Added DisconnectMobile option in the installer</*>
 <*>Added root options in the installer, including none</*>
+<*>Added Runtime choice in installer</*>

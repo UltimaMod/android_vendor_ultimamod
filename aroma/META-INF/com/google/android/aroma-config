@@ -173,14 +173,14 @@ textbox(
 			"keyboards",			"<#selectbg_g>Keyboards</#>","",																				"group",
 			"aosp",					"AOSP", 				"AOSP Keyboard",																		"select.selected",
 			"google",				"Google", 				"Google enhanced AOSP Keyboard",														"select",
-			"swift",				"SwiftKey", 			"Keyboard app for Android that delivers smarter autocorrect and next-word prediction,",	"select",
+			"swift",				"SwiftKey", 			"Keyboard app for Android that delivers smarter autocorrect and next-word prediction",	"select",
 			
 			"misc",					"<#selectbg_g>Data Apps</#>","",																			"group",
-			"acdisplay",			"AcDisplay", 			"An Active Display app created by ACHep",											"check.checked",
-			"adaway",				"AdAway", 				"Ad blocking via the HOSTS file",													"check.checked",
+			"acdisplay",			"AcDisplay", 			"An Open Source Active Display app created by ACHep",								"check.checked",
+			"adaway",				"AdAway", 				"Open Source Ad blocking via the HOSTS file",													"check.checked",
 			"disconnect",			"DisconnectMobile",		"Block Malvertising ads and protect your identity online",							"check.checked",
 			"dropbox",				"Dropbox", 				"Sync and backup your phones pictures and videos",									"check.checked",
-			"fastergps",			"FasterGPS", 			"Help locate your GPS signal quicker by preselecting your country",					"check.checked",
+			"fastergps",			"FasterGPS", 			"Help locate your GPS signal quicker by preselecting your country (Open Source)",					"check.checked",
 			
 			"lwp",					"<#selectbg_g>Live Wallpapers</#>","",																		"group",
 			"bubbles",				"Bubbles", 				"",																					"check.checked",

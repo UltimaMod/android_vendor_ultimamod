@@ -7,6 +7,8 @@ ULTIMAMOD_VERSION_MAJOR=2
 ULTIMAMOD_VERSION_MINOR=0
 ULTIMAMOD_UPDATE_URL=http://www.ultimarom.com/rom/update/update_manifest.xml
 
+AND_BUILD_NUMBER=KTU84P
+
 DISTTYPE=
 DEVICE=
 VENDOR=vendor/ultimamod
@@ -35,8 +37,11 @@ repackROM () {
     echo "Using file $LATESTZIP"
     $SEVENZIP x -o"$OUTMOD" "$OUTFOLDER"/"${LATESTZIP}".zip > /dev/null
 
+    cp -a "$VENDOR"/CHANGELOG-UM.txt "$OUTMOD"/system/etc
+
     # Delete some unnecessary files
     rm -rf "$OUTMOD"/META-INF "$OUTMOD"/recovery
+    rm -f "$OUTMOD"/system/priv-app/CMUpdater.apk
 
     echo "Copying UltimaMod files"
 
@@ -125,7 +130,8 @@ repackROM () {
 
     ## build.prop
     FILE="$OUTMOD"/system/build.prop
-    sed -i "s/ro.build.display.id=.*/ro.build.display.id=UltimaMod-${ULTIMAMOD_BUILD_VERSION}-v${ULTIMAMOD_VERSION_MAJOR}.${ULTIMAMOD_VERSION_MINOR}/g" "$FILE"
+    sed -i "s/ro.cm.display.version=.*$DEVICE//g" "$FILE"
+    sed -i "s/ro.build.display.id=.*/ro.build.display.id=${AND_BUILD_NUMBER}/g" "$FILE"
     sed -i "s/ro.com.android.dateformat=MM-dd-yyyy/ro.com.android.dateformat=dd-MM-yyyy/g" "$FILE"
     echo " " >> "$FILE"
     echo "# UltimaMod" >> "$FILE"
@@ -202,6 +208,7 @@ repoSync(){
 }
 
 makeclean(){
+    rm -rf ~/.ccache
     make clean
     echo " "
     echo " "
