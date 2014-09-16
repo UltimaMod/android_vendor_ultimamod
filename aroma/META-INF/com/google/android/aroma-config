@@ -134,9 +134,21 @@ textbox(
 		"wipe",					"<#selectbg_g>Please Choose a wiping method</#>",				"",																			"group",
 		"factory",				"Factory Reset", 		"Wipe everything on the data partition, except /data/media (the internal storage) <#ff4444>(RECOMMENDED)</#>",		"select.selected",
 		"everything",			"Everything", 			"Wipe everything on the data partition, including the internal storage (extSdCard is not touched)",					"select",
-		"nothing",				"Nothing", 				"Wipe just /system. Same as a 'dirty' flash",																		"select"
+		"nothing",				"Nothing", 				"Wipe just /system. Same as a 'dirty' flash (useful for upgrading)",												"select"
 	);
-	
+
+## Install presets
+#	form(
+#		"Wiping Data",
+#		"Decide whether to wipe data or not",
+#		"@alert",
+#		"wipe.prop",
+#
+#		"wipe",					"<#selectbg_g>Please Choose a wiping method</#>",				"",																			"group",
+#		"factory",				"Factory Reset", 		"Wipe everything on the data partition, except /data/media (the internal storage) <#ff4444>(RECOMMENDED)</#>",		"select.selected",
+#		"everything",			"Everything", 			"Wipe everything on the data partition, including the internal storage (extSdCard is not touched)",					"select",
+#		"nothing",				"Nothing", 				"Wipe just /system. Same as a 'dirty' flash (useful for upgrading)",												"select"
+#	);
 		
 	  #-------------------------+-----------------[     Install Data     ]----------------+---------------#
 	  #-------------------------+---------------------------------------------------------+---------------#
@@ -153,9 +165,12 @@ textbox(
 			"cyan",					"Stock CyanogenMod", 	"Stock boot animation from CyanogenMod",								 			"select",
 
 			"root",					"<#selectbg_g>Root</#>","",																					"group",
-			"supersu",				"SuperSU",				"Chainfire's Superuser implementation <#ff4444>(RECOMMENDED)</#>",					"select.selected",
-			"superuser",			"Superuser",			"Koush's Superuser implementation (stock CyanogenMod)",								"select",
-			"none",					"None",					"Do not install root",																"select",
+			"supersu",				"Yes",					"Chainfire's Superuser implementation",												"select.selected",
+			"none",					"No",					"Do not install root",																"select",
+
+			"odex",					"<#selectbg_g>Optimisation</#>","", 																		"group",
+			"odex",					"Odex'd",				"Enable Odexed files (Optimised files. Faster system, less end-user customising) <#ff4444>(RECOMMENDED)</#>",	"select.selected",
+			"deodex",				"Deodex'd",				"Enable Deodexed files (Slower system, rasier for end user to modify files)",		"select",
 
 			"runtime",				"<#selectbg_g>Runtime</#>","", 																				"group",
 			"art",					"ART",					"Enable ART <#ff4444>(EXPERIMENTAL!! - First boot may take longer)</#>",			"select",
@@ -177,10 +192,11 @@ textbox(
 			
 			"misc",					"<#selectbg_g>Data Apps</#>","",																			"group",
 			"acdisplay",			"AcDisplay", 			"An Open Source Active Display app created by ACHep",								"check.checked",
-			"adaway",				"AdAway", 				"Open Source Ad blocking via the HOSTS file",													"check.checked",
+			"adaway",				"AdAway", 				"Open Source Ad blocking via the HOSTS file",										"check.checked",
 			"disconnect",			"DisconnectMobile",		"Block Malvertising ads and protect your identity online",							"check.checked",
 			"dropbox",				"Dropbox", 				"Sync and backup your phones pictures and videos",									"check.checked",
-			"fastergps",			"FasterGPS", 			"Help locate your GPS signal quicker by preselecting your country (Open Source)",					"check.checked",
+			"fastergps",			"FasterGPS", 			"Help locate your GPS signal quicker by preselecting your country (Open Source)",	"check.checked",
+			"terminal",				"Terminal", 			"Android Terminal Emulator (Open Source)",											"check.checked",
 			
 			"lwp",					"<#selectbg_g>Live Wallpapers</#>","",																		"group",
 			"bubbles",				"Bubbles", 				"",																					"check.checked",

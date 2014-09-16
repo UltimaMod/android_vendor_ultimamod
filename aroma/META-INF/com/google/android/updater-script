@@ -43,10 +43,13 @@ ui_print("@Mounting and Formatting Devices...");
 	
 ui_print("@Installing System...");
 	package_extract_dir("system", "/system");
-	
+
+    if file_getprop("/tmp/aroma-data/install.prop","odex") == "odex" then
+        package_extract_dir("ultima/odex", "/system");
+    endif;
+
 ########################## INSTALL DATA #####################	
-	
-ui_print("@Installing System...");
+
 	package_extract_dir("data", "/data");
 
 ################### INSTALLING SYSTEM APPS ####################
@@ -73,19 +76,26 @@ ui_print("@Installing System...");
       ui_print("Installing Google Experience Launcher");
 	  package_extract_dir("ultima/launchers/google", "/system");
 	  delete("/system/priv-app/Trebuchet.apk");
+      delete("/system/priv-app/Trebuchet.odex")
       delete("/system/app/CMHome.apk");
+      delete("/system/app/CMHome.odex")
     endif;	
 	if file_getprop("/tmp/aroma-data/install.prop","launcher") == "nova" then
       ui_print("Installing Nova Launcher");
 	  package_extract_dir("ultima/launchers/nova", "/system");
 	  delete("/system/priv-app/Trebuchet.apk");
+      delete("/system/priv-app/Trebuchet.odex")
       delete("/system/app/CMHome.apk");
+      delete("/system/app/CMHome.odex")
     endif;
 
 # Cameras
 	if file_getprop("/tmp/aroma-data/install.prop","camera_aosp") == "1" then
 		ui_print("Installing AOSP Camera");
 		package_extract_dir("ultima/camera/aosp", "/system");
+        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
+            delete("/system/app/Camera2.odex");
+        endif;
 	endif;
 	if file_getprop("/tmp/aroma-data/install.prop","camera_google") == "1" then
 		ui_print("Installing Google Camera");
@@ -96,6 +106,9 @@ ui_print("@Installing System...");
 	if file_getprop("/tmp/aroma-data/install.prop","keyboards") == "aosp" then
 		ui_print("Installing AOSP Keyboard");
 		package_extract_dir("ultima/keyboards/aosp", "/system");
+        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
+            delete("/system/app/LatinIME.odex");
+        endif;
 	endif;
     if file_getprop("/tmp/aroma-data/install.prop","keyboards") == "google" then
       ui_print("Installing Google Keyboard");
@@ -108,9 +121,12 @@ ui_print("@Installing System...");
 
 
 #Live Wallpapers
-	
+
 	if file_getprop("/tmp/aroma-data/install.prop","bubbles") == "1" then
         package_extract_dir("ultima/live_wallpapers/bubbles", "/system");
+        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
+            delete("/system/app/NoiseField.odex");
+        endif;
     endif;
 	
 	if file_getprop("/tmp/aroma-data/install.prop","deepsea") == "1" then
@@ -119,6 +135,9 @@ ui_print("@Installing System...");
 	
 	 if file_getprop("/tmp/aroma-data/install.prop","holo_spiral") == "1" then
         package_extract_dir("ultima/live_wallpapers/holo_spiral", "/system");
+        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
+            delete("/system/app/HoloSpiralWallpaper.odex");
+        endif;
     endif;
 	
 	if file_getprop("/tmp/aroma-data/install.prop","luminous_dots") == "1" then
@@ -131,18 +150,30 @@ ui_print("@Installing System...");
 
     if file_getprop("/tmp/aroma-data/install.prop","smoke") == "1" then
         package_extract_dir("ultima/live_wallpapers/magic_smoke", "/system");
+        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
+            delete("/system/app/MagicSmokeWallpapers.odex");
+        endif;
     endif;
 	
 	if file_getprop("/tmp/aroma-data/install.prop","phasebeam") == "1" then
         package_extract_dir("ultima/live_wallpapers/phasebeam", "/system");
+        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
+            delete("/system/app/PhaseBeam.odex");
+        endif;
     endif;
 	
 	if file_getprop("/tmp/aroma-data/install.prop","photophase") == "1" then
         package_extract_dir("ultima/live_wallpapers/photophase", "/system");
+        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
+            delete("/system/app/PhotoPhase.odex");
+        endif;
     endif;
 	
 	if file_getprop("/tmp/aroma-data/install.prop","sunbeam") == "1" then
         package_extract_dir("ultima/live_wallpapers/sunbeam", "/system");
+        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
+            delete("/system/app/SunBeam.odex");
+        endif;
     endif;
 	
 # Misc
@@ -169,6 +200,11 @@ ui_print("@Installing System...");
 	 if file_getprop("/tmp/aroma-data/install.prop","fastergps") == "1" then
 		ui_print("Installing FasterGPS");
         package_extract_dir("ultima/apps/misc/fastergps", "/data");
+    endif;
+
+    if file_getprop("/tmp/aroma-data/install.prop","terminal") == "1" then
+        ui_print("Installing Terminal");
+        package_extract_dir("ultima/apps/misc/terminal", "/system");
     endif;
 
 
@@ -543,7 +579,6 @@ ui_print("@Installing Swap...");
 	package_extract_file("ultima/scripts/hardswap.sh", "/tmp/hardswap.sh");
 	set_perm(0, 0, 0777, "/tmp/hardswap.sh");
 	run_program("/tmp/hardswap.sh", "/preload", file_getprop("/tmp/aroma-data/hardswap.prop", "preload"));
-
 
 ################################## ROM INSTALLED ####################################	
 

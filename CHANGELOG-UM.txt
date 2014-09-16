@@ -9,7 +9,8 @@ CHANGELOG
 ---------
 
 ### UltimaMod - v2.0 Folkvangr
-* Changed base to CyanogenMod 11 - Should make for quicker updates
+* Changed base to CyanogenMod 11 (latest sources as of build time) - Should make for quicker updates
+* Odexed and Deodexed version available in the same zip
 * Added Gapps packages in the installer. Many options. Full, lite or custom
 * Added call recording as default for all devices (Cyanogen limit this per region, which is unnecessary)
 * Added Traffic Meter and controls to SystemUI
@@ -19,4 +20,6 @@ CHANGELOG
 * Added DisconnectMobile option in the installer
 * Added root options in the installer, including none
 * Added Runtime choice in installer
+* Added custom battery icon colours (color, level colors, bolt colours, text colors etc) 
+* Fixed some Messaging theming issues
 

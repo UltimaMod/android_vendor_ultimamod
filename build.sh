@@ -9,7 +9,7 @@ ULTIMAMOD_UPDATE_URL=http://www.ultimarom.com/rom/update/update_manifest.xml
 
 AND_BUILD_NUMBER=KTU84P
 
-DISTTYPE=
+DISTTYPE=user
 DEVICE=
 VENDOR=vendor/ultimamod
 SEVENZIP=$VENDOR/tools/7za
@@ -42,6 +42,7 @@ repackROM () {
     # Delete some unnecessary files
     rm -rf "$OUTMOD"/META-INF "$OUTMOD"/recovery
     rm -f "$OUTMOD"/system/priv-app/CMUpdater.apk
+    rm -f "$OUTMOD"/system/priv-app/CMUpdater.odex
 
     echo "Copying UltimaMod files"
 
@@ -55,24 +56,37 @@ repackROM () {
 
     # Move over optional files
     ## Live Wallpapers
+    mkdir -p "$OUTMOD"/ultima/live_wallpapers/magic_smoke/app "$OUTMOD"/ultima/live_wallpapers/bubbles/app "$OUTMOD"/ultima/live_wallpapers/phasebeam/app "$OUTMOD"/ultima/live_wallpapers/photophase/app "$OUTMOD"/ultima/live_wallpapers/sunbeam/app "$OUTMOD"/ultima/live_wallpapers/holo_spiral/app
     mv "$OUTMOD"/system/app/MagicSmokeWallpapers.apk "$OUTMOD"/ultima/live_wallpapers/magic_smoke/app
     mv "$OUTMOD"/system/app/NoiseField.apk "$OUTMOD"/ultima/live_wallpapers/bubbles/app
     mv "$OUTMOD"/system/app/PhaseBeam.apk "$OUTMOD"/ultima/live_wallpapers/phasebeam/app
     mv "$OUTMOD"/system/app/PhotoPhase.apk "$OUTMOD"/ultima/live_wallpapers/photophase/app
     mv "$OUTMOD"/system/app/SunBeam.apk "$OUTMOD"/ultima/live_wallpapers/sunbeam/app
     mv "$OUTMOD"/system/app/HoloSpiralWallpaper.apk "$OUTMOD"/ultima/live_wallpapers/holo_spiral/app
+
+    mv "$OUTMOD"/system/app/MagicSmokeWallpapers.odex "$OUTMOD"/ultima/live_wallpapers/magic_smoke/app
+    mv "$OUTMOD"/system/app/NoiseField.odex "$OUTMOD"/ultima/live_wallpapers/bubbles/app
+    mv "$OUTMOD"/system/app/PhaseBeam.odex "$OUTMOD"/ultima/live_wallpapers/phasebeam/app
+    mv "$OUTMOD"/system/app/PhotoPhase.odex "$OUTMOD"/ultima/live_wallpapers/photophase/app
+    mv "$OUTMOD"/system/app/SunBeam.odex "$OUTMOD"/ultima/live_wallpapers/sunbeam/app
+    mv "$OUTMOD"/system/app/HoloSpiralWallpaper.odex "$OUTMOD"/ultima/live_wallpapers/holo_spiral/app
     
     ## Keyboards
+    mkdir -p "$OUTMOD"/ultima/keyboards/aosp/app "$OUTMOD"/ultima/keyboards/aosp/lib
     mv "$OUTMOD"/system/app/LatinIME.apk "$OUTMOD"/ultima/keyboards/aosp/app
+    mv "$OUTMOD"/system/app/LatinIME.odex "$OUTMOD"/ultima/keyboards/aosp/app
     mv "$OUTMOD"/system/lib/libjni_latinime.so "$OUTMOD"/ultima/keyboards/aosp/lib
 
     ## Camera
+    mkdir -p "$OUTMOD"/ultima/camera/aosp/app "$OUTMOD"/ultima/camera/aosp/lib
     mv "$OUTMOD"/system/app/Camera2.apk "$OUTMOD"/ultima/camera/aosp/app
+    mv "$OUTMOD"/system/app/Camera2.odex "$OUTMOD"/ultima/camera/aosp/app
     mv "$OUTMOD"/system/lib/libjni_mosaic.so "$OUTMOD"/ultima/camera/aosp/lib
 
     ## Boot animation
     mv "$OUTMOD"/system/media/bootanimation.zip "$OUTMOD"/ultima/bootanimation/cyan
     if [ "$DEVICE" == "jflte" ]; then
+        mkdir -p "$OUTMOD"/ultima/bootanimation/stock "$OUTMOD"/ultima/bootanimation/l_preview
         cp $VENDOR/prebuilt/common/bootanimation/stock/BOOTANIMATION-1920x1080.zip "$OUTMOD"/ultima/bootanimation/stock/bootanimation.zip
         cp $VENDOR/prebuilt/common/bootanimation/l_preview/BOOTANIMATION-1920x1080.zip "$OUTMOD"/ultima/bootanimation/l_preview/bootanimation.zip
     else
@@ -93,11 +107,6 @@ repackROM () {
         sed -i "s/ini_set(\"dp\",\"4\");/ini_set(\"dp\",\"5\");/g" "$FILE"
         sed -i "s/ROM Version/ROM Version${REAL_TAB}/g" "$FILE"
     fi
-
-    if [ "$DISTTYPE" == "user" ]; then
-        sed -i "s/\"superuser\",          \"Superuser\",            \"Koush's Superuser implementation (stock CyanogenMod)\",                             \"select\",//g" "$FILE"
-    fi
-
 
     ## updater-script
     FILE="$OUTMOD"/META-INF/com/google/android/updater-script
@@ -156,15 +165,21 @@ repackROM () {
     cp "$VENDOR"/prebuilt/common/etc/init.d/00ARCHIDROID_INITD "$OUTMOD"/system/etc/init.d/00ARCHIDROID_INITD
 
     # Zip back up
-    if [ -e "$OUTFOLDER"/"$ZIPNAME" ]; then
-        rm "$OUTFOLDER"/"$ZIPNAME"
+    if [ -e "$ZIPNAME" ]; then
+        rm "$ZIPNAME"
     fi
 
-    echo "Creating ROM zip"
-    $SEVENZIP a -r -mx9 -tzip "$OUTFOLDER"/"$ZIPNAME" ./"$OUTMOD"/* > /dev/null
-    md5sum "$OUTFOLDER"/"$ZIPNAME" > "$OUTFOLDER"/"$ZIPNAME".md5
+    ## Move Odex files
+    mkdir -p "$OUTMOD"/ultima/odex/app "$OUTMOD"/ultima/odex/priv-app "$OUTMOD"/ultima/odex/framework
+    find "$OUTMOD"/system/app/* -name "*.odex" -exec mv -t "$OUTMOD"/ultima/odex/app {} +
+    find "$OUTMOD"/system/priv-app/* -name "*.odex" -exec mv -t "$OUTMOD"/ultima/odex/priv-app {} +
+    find "$OUTMOD"/system/framework/* -name "*.odex" -exec mv -t "$OUTMOD"/ultima/odex/framework {} +
 
-    echo -e "\e[1;91mYou can find your ROM zip in the out folder"
+    echo "Creating ROM zip"
+    $SEVENZIP a -r -mx9 -tzip "$ZIPNAME" ./"$OUTMOD"/* > /dev/null
+    md5sum "$ZIPNAME" > "$ZIPNAME".md5
+
+    echo -e "\e[1;91mYou can find your ROM zip in the CyanogenMod root folder"
     echo -e "\e[0m "
 }
 
@@ -187,15 +202,17 @@ repoSync(){
     repo sync -j8
     ROOMSER=.repo/local_manifests/ultima_roomservice.xml
     UPSTREAM=$(cat ${ROOMSER} | grep -e "<remove-project path=\".*\"" | cut -d= -f2 | sed 's/name//1' | sed 's/\"//g')
+    ORIGIN=ultimamod
+    BRANCH=cm-11.0
 
     while read -r line; do
         echo "Upstream merging for $line"
         cd  "$line"
-        git pull upstream cm-11.0
-        git push ultimamod HEAD:cm-11.0
+        UPSTREAM=$(cat UPSTREAMS)
+        git pull https://www.github.com/"$UPSTREAM" "$BRANCH"
+        git push "$ORIGIN" HEAD:"$BRANCH"
         croot
     done <<< "$UPSTREAM"
-    echo "Upstream merging"
     echo " "
     echo " "
     echo "Anything else?"
@@ -222,15 +239,6 @@ makeclean(){
 }
 
 create(){
-    echo " "
-    echo " "
-    echo "Would you like user (Odex) or userdebug (Deodex)?"
-    select dist in "user" "userdebug"; do
-        case $dist in
-            user ) DISTTYPE=user; break ;;
-            userdebug ) DISTTYPE=userdebug; break ;;
-        esac
-    done
     echo " "
     echo " "
     echo "Which device would you like to build? (These are the only supported devices, currently)"
