@@ -1,3 +1,6 @@
+<b><#selectbg_g>UltimaMod - v2.0.1 Folkvangr</#></b>
+<*>Updated to latest CyanogenMod sources</*>
+
 <b><#selectbg_g>UltimaMod - v2.0 Folkvangr</#></b>
 <*>Rebranded to UltimaMod (Ultima CyanogenMOD) </*>
 <*>Changed base to CyanogenMod 11 (latest sources as of build time) - Should make for quicker updates</*>
@@ -6,6 +9,7 @@
 <*>Added call recording as default for all devices (Cyanogen limit this per region, which is unnecessary)</*>
 <*>Added Traffic Meter and controls to SystemUI</*>
 <*>Added Recents panel controls (Clear all button position and RAM bar)</*>
+<*>Added battery color, text and font controls</*>
 <*>Added clock option: AM/PM indicator, colour and day of week</*>
 <*>Added F-Droid option in the installer, for those who don't want Google Apps.</*>
 <*>Added DisconnectMobile option in the installer</*>

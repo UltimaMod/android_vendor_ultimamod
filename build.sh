@@ -4,7 +4,7 @@
 ULTIMAMOD_ROMNAME=UltimaMod
 ULTIMAMOD_BUILD_VERSION=Folkvangr
 ULTIMAMOD_VERSION_MAJOR=2
-ULTIMAMOD_VERSION_MINOR=0
+ULTIMAMOD_VERSION_MINOR=0.1
 ULTIMAMOD_UPDATE_URL=http://www.ultimarom.com/rom/update/update_manifest.xml
 
 AND_BUILD_NUMBER=KTU84P
@@ -19,7 +19,7 @@ TYPE=
 
 buildROM () { 
     runLunch
-    mka bacon -j8
+    brunch cm_"$DEVICE"-user
     repackROM ;
 }
 
@@ -84,7 +84,8 @@ repackROM () {
     mv "$OUTMOD"/system/lib/libjni_mosaic.so "$OUTMOD"/ultima/camera/aosp/lib
 
     ## Boot animation
-    mv "$OUTMOD"/system/media/bootanimation.zip "$OUTMOD"/ultima/bootanimation/cyan
+    mkdir -p "$OUTMOD"/ultima/bootanimation/cyan
+    mv "$OUTMOD"/system/media/bootanimation.zip "$OUTMOD"/ultima/bootanimation/cyan/bootanimation.zip
     if [ "$DEVICE" == "jflte" ]; then
         mkdir -p "$OUTMOD"/ultima/bootanimation/stock "$OUTMOD"/ultima/bootanimation/l_preview
         cp $VENDOR/prebuilt/common/bootanimation/stock/BOOTANIMATION-1920x1080.zip "$OUTMOD"/ultima/bootanimation/stock/bootanimation.zip
@@ -185,12 +186,12 @@ repackROM () {
 
 runLunch() {
     # Lunch using our selection
-    lunch cm_"$DEVICE"-"$DISTTYPE" > /dev/null
+    breakfast cm_"$DEVICE"-user > /dev/null
 
     # UltimaMod variables
     OUTFOLDER=out/target/product/$DEVICE
     OUTMOD=$OUTFOLDER/ultimamod
-    ZIPNAME=UltimaMod-${ULTIMAMOD_BUILD_VERSION}-v${ULTIMAMOD_VERSION_MAJOR}.${ULTIMAMOD_VERSION_MINOR}-${DEVICE}-${DISTTYPE}.zip
+    ZIPNAME=UltimaMod-${ULTIMAMOD_BUILD_VERSION}-v${ULTIMAMOD_VERSION_MAJOR}.${ULTIMAMOD_VERSION_MINOR}-${DEVICE}.zip
 
     # Delete the any existing ones, so that if the build fails, so does the repack
     if [ -e "$OUTZIP" ]; then
