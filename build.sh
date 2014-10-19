@@ -269,7 +269,7 @@ create(){
 }
 echo " "
 echo " "
-echo -e "\e[1;91mWelcome to the UltimaMod build script"
+echo -e "\e[1;91mWelcome to the $ULTIMAMOD_ROMNAME ${ULTIMAMOD_VERSION_MAJOR}.${ULTIMAMOD_VERSION_MINOR} $ULTIMAMOD_BUILD_VERSION build script"
 echo -e "\e[0m "
 . build/envsetup.sh > /dev/null
 echo "Please make your selections carefully"
