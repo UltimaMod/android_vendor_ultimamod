@@ -1,5 +1,8 @@
 <b><#selectbg_g>UltimaMod - v2.0.1 Folkvangr</#></b>
 <*>Updated to latest CyanogenMod sources</*>
+<*>Updated Gapps to latest, including Play Store and GSF</*>
+<*>Updated Misc Apps (Dropbox, SwiftKey, etc)</*>
+<*>Updated SuperSU to 2.14</*>
 <*>Fixed factory reset installer option</*>
 
 <b><#selectbg_g>UltimaMod - v2.0 Folkvangr</#></b>
