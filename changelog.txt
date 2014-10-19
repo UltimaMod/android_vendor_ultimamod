@@ -1,5 +1,6 @@
 <b><#selectbg_g>UltimaMod - v2.0.1 Folkvangr</#></b>
 <*>Updated to latest CyanogenMod sources</*>
+<*>Fixed factory reset installer option</*>
 
 <b><#selectbg_g>UltimaMod - v2.0 Folkvangr</#></b>
 <*>Rebranded to UltimaMod (Ultima CyanogenMOD) </*>

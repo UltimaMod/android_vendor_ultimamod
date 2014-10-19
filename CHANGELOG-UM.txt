@@ -8,7 +8,8 @@ Visit http://ultimarom.com for downloads, information and themed Google apps pac
 CHANGELOG 
 ---------
 ### UltimaMod - v2.0.1 Folkvangr
-* Updated to latest CyanogenMod sources
+* Updated to latest CyanogenMod sources (various fixes, of course)
+* Fixed factory reset installer option
 
 ### UltimaMod - v2.0 Folkvangr
 * Changed base to CyanogenMod 11 (latest sources as of build time) - Should make for quicker updates
