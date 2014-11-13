@@ -272,8 +272,9 @@ echo -e "\e[1;91mWelcome to the $ULTIMAMOD_ROMNAME ${ULTIMAMOD_VERSION_MAJOR}.${
 echo -e "\e[0m "
 . build/envsetup.sh > /dev/null
 # Check that UltimaMod roomservice.xml is installed
-if[ -e .repo/local_manifests/ultima_roomservice.xml ]; then
+if [ -e .repo/local_manifests/ultima_roomservice.xml ]; then
     # It's installed, good
+    echo "Ok" > /dev/null
 else
     # Not installed, so install it now
     cp vendor/ultimamod/ultima_roomservice.xml .repo/local_manifests/ultima_roomservice.xml
@@ -282,7 +283,7 @@ echo "Please make your selections carefully"
 echo " "
 echo " "
 echo "Do you wish to build now, sync or repack? (Choose repack to recreate the AROMA zip ONLY if you have already built)"
-select build in "build" "repack" "sync" "clean"; do
+select build in "build" "repack" "sync" "clean" "cleanfully"; do
     case $build in
         build ) create 1; break;;
         repack )  create 2; break;;
