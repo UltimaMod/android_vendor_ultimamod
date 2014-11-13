@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+	<remote  name="ultimamod"
+           fetch="https://github.com"
+           revision="cm-11.0" />
+
+	<!-- Samsung propriatory blobs -->
+  	<project name="TheMuppets/proprietary_vendor_samsung" path="vendor/samsung" remote="ultimamod" />
+
+  	<!-- Ultima Apps -->
+  	<project path="packages/apps/UltimaSettings" name="UltimaMod/android_packages_apps_UltimaSettings" remote="ultimamod"/>
+  	<project path="packages/wallpapers/UltimaWallpapers" name="UltimaMod/android_packages_wallpapers_UltimaWallpapers" remote="ultimamod"/>
+  	<project path="packages/wallpapers/SunBeam" name="UltimaMod/android_packages_wallpapers_SunBeam" remote="ultimamod"/>
+  	<project path="packages/apps/OTAUpdates" name="UltimaMod/OTAUpdates" remote="ultimamod" revision="cm-11.0" />
+
+  	<!-- Ultima Vendor -->
+  	<project path="vendor/ultimamod" name="UltimaMod/android_vendor_ultimamod" remote="ultimamod" />
+
+	<!-- framework/base -->
+	<remove-project path="frameworks/base" name="CyanogenMod/android_frameworks_base" />
+	<project path="frameworks/base" name="UltimaMod/android_frameworks_base" remote="ultimamod"/>
+
+	<!-- ContactsProvider -->
+	<remove-project path="packages/providers/ContactsProvider" name="CyanogenMod/android_packages_providers_ContactsProvider" />
+	<project path="packages/providers/ContactsProvider" name="UltimaMod/android_packages_providers_ContactsProvider" remote="ultimamod" />
+
+	<!-- Mms -->
+	<remove-project path="packages/apps/Mms" name="CyanogenMod/android_packages_apps_Mms" />
+	<project path="packages/apps/Mms" name="UltimaMod/android_packages_apps_Mms" remote="ultimamod"/>
+
+	<!-- ContactsCommon -->
+	<remove-project path="packages/apps/ContactsCommon" name="CyanogenMod/android_packages_apps_ContactsCommon" />
+	<project path="packages/apps/ContactsCommon" name="UltimaMod/android_packages_apps_ContactsCommon" remote="ultimamod"/>
+
+	<!-- Settings -->
+	<remove-project path="packages/apps/Settings" name="CyanogenMod/android_packages_apps_Settings" />
+	<project path="packages/apps/Settings" name="UltimaMod/android_packages_apps_Settings" remote="ultimamod"/>
+
+	<!-- CM Vendor -->
+	<remove-project path="vendor/cm" name="CyanogenMod/android_vendor_cm" />
+	<project path="vendor/cm" name="UltimaMod/android_vendor_cm" remote="ultimamod" />
+
+	<!-- Google GCC 4.8 -->
+	<project path="prebuilts/gcc/linux-x86/arm/arm-eabi-4.8" name="platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8" groups="linux,x86" remote="aosp" revision="master" />
+	<project path="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8" name="platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8" groups="linux,x86" remote="aosp" revision="master" />
+
+</manifest>

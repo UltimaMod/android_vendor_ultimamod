@@ -44,10 +44,6 @@ ui_print("@Mounting and Formatting Devices...");
 ui_print("@Installing System...");
 	package_extract_dir("system", "/system");
 
-    if file_getprop("/tmp/aroma-data/install.prop","odex") == "odex" then
-        package_extract_dir("ultima/odex", "/system");
-    endif;
-
 ########################## INSTALL DATA #####################	
 
 	package_extract_dir("data", "/data");
@@ -76,26 +72,19 @@ ui_print("@Installing System...");
       ui_print("Installing Google Experience Launcher");
 	  package_extract_dir("ultima/launchers/google", "/system");
 	  delete("/system/priv-app/Trebuchet.apk");
-      delete("/system/priv-app/Trebuchet.odex");
       delete("/system/app/CMHome.apk");
-      delete("/system/app/CMHome.odex");
     endif;	
 	if file_getprop("/tmp/aroma-data/install.prop","launcher") == "nova" then
       ui_print("Installing Nova Launcher");
 	  package_extract_dir("ultima/launchers/nova", "/system");
 	  delete("/system/priv-app/Trebuchet.apk");
-      delete("/system/priv-app/Trebuchet.odex");
       delete("/system/app/CMHome.apk");
-      delete("/system/app/CMHome.odex");
     endif;
 
 # Cameras
 	if file_getprop("/tmp/aroma-data/install.prop","camera_aosp") == "1" then
 		ui_print("Installing AOSP Camera");
 		package_extract_dir("ultima/camera/aosp", "/system");
-        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
-            delete("/system/app/Camera2.odex");
-        endif;
 	endif;
 	if file_getprop("/tmp/aroma-data/install.prop","camera_google") == "1" then
 		ui_print("Installing Google Camera");
@@ -106,9 +95,6 @@ ui_print("@Installing System...");
 	if file_getprop("/tmp/aroma-data/install.prop","keyboards") == "aosp" then
 		ui_print("Installing AOSP Keyboard");
 		package_extract_dir("ultima/keyboards/aosp", "/system");
-        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
-            delete("/system/app/LatinIME.odex");
-        endif;
 	endif;
     if file_getprop("/tmp/aroma-data/install.prop","keyboards") == "google" then
       ui_print("Installing Google Keyboard");
@@ -119,14 +105,21 @@ ui_print("@Installing System...");
 	  package_extract_dir("ultima/keyboards/swiftkey", "/system");
     endif;
 
+# Messaging
+    if file_getprop("/tmp/aroma-data/install.prop","mms_cyan") == "1" then
+        ui_print("Installing Cyanogen Messaging");
+        package_extract_dir("ultima/messaging/cyan", "/system");
+    endif;
+    if file_getprop("/tmp/aroma-data/install.prop","mms_google") == "1" then
+        ui_print("Installing Google Messenger");
+        package_extract_dir("ultima/messaging/google", "/system");
+    endif;
+
 
 #Live Wallpapers
 
 	if file_getprop("/tmp/aroma-data/install.prop","bubbles") == "1" then
         package_extract_dir("ultima/live_wallpapers/bubbles", "/system");
-        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
-            delete("/system/app/NoiseField.odex");
-        endif;
     endif;
 	
 	if file_getprop("/tmp/aroma-data/install.prop","deepsea") == "1" then
@@ -135,9 +128,6 @@ ui_print("@Installing System...");
 	
 	 if file_getprop("/tmp/aroma-data/install.prop","holo_spiral") == "1" then
         package_extract_dir("ultima/live_wallpapers/holo_spiral", "/system");
-        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
-            delete("/system/app/HoloSpiralWallpaper.odex");
-        endif;
     endif;
 	
 	if file_getprop("/tmp/aroma-data/install.prop","luminous_dots") == "1" then
@@ -150,30 +140,18 @@ ui_print("@Installing System...");
 
     if file_getprop("/tmp/aroma-data/install.prop","smoke") == "1" then
         package_extract_dir("ultima/live_wallpapers/magic_smoke", "/system");
-        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
-            delete("/system/app/MagicSmokeWallpapers.odex");
-        endif;
     endif;
 	
 	if file_getprop("/tmp/aroma-data/install.prop","phasebeam") == "1" then
         package_extract_dir("ultima/live_wallpapers/phasebeam", "/system");
-        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
-            delete("/system/app/PhaseBeam.odex");
-        endif;
     endif;
 	
 	if file_getprop("/tmp/aroma-data/install.prop","photophase") == "1" then
         package_extract_dir("ultima/live_wallpapers/photophase", "/system");
-        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
-            delete("/system/app/PhotoPhase.odex");
-        endif;
     endif;
 	
 	if file_getprop("/tmp/aroma-data/install.prop","sunbeam") == "1" then
         package_extract_dir("ultima/live_wallpapers/sunbeam", "/system");
-        if file_getprop("/tmp/aroma-data/install.prop","odex") == "deodex" then
-            delete("/system/app/SunBeam.odex");
-        endif;
     endif;
 	
 # Misc
@@ -223,6 +201,7 @@ ui_print("@Installing System...");
 
         if file_getprop("/tmp/aroma-data/gapps.prop","calendar") == "1" then
             package_extract_dir("ultima/apps/gapps/calendar", "/system");
+            delete("/system/app/Calendar.apk");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","chrome") == "1" then
@@ -232,15 +211,7 @@ ui_print("@Installing System...");
         if file_getprop("/tmp/aroma-data/gapps.prop","print") == "1" then
             package_extract_dir("ultima/apps/gapps/print", "/system");
         endif;
-
-        if file_getprop("/tmp/aroma-data/gapps.prop","manager") == "1" then
-            package_extract_dir("ultima/apps/gapps/manager", "/system");
-        endif;
     	
-    	if file_getprop("/tmp/aroma-data/gapps.prop","docs") == "1" then
-            package_extract_dir("ultima/apps/gapps/docs", "/data");
-        endif;
-
         if file_getprop("/tmp/aroma-data/gapps.prop","drive") == "1" then
             package_extract_dir("ultima/apps/gapps/drive", "/data");
         endif;
@@ -282,7 +253,7 @@ ui_print("@Installing System...");
             package_extract_dir("ultima/apps/gapps/news", "/system");
         endif;
 
-        if file_getprop("/tmp/aroma-data/gapps.prop","news_weather") == "1" then
+        if file_getprop("/tmp/aroma-data/gapps.prop","genie") == "1" then
             package_extract_dir("ultima/apps/gapps/weather", "/system");
         endif;
 
@@ -293,19 +264,7 @@ ui_print("@Installing System...");
         if file_getprop("/tmp/aroma-data/gapps.prop","office") == "1" then
             package_extract_dir("ultima/apps/gapps/office", "/system");
         endif;
-
-        if file_getprop("/tmp/aroma-data/gapps.prop","sheets") == "1" then
-            package_extract_dir("ultima/apps/gapps/sheets", "/data");
-        endif;
     	
-    	if file_getprop("/tmp/aroma-data/gapps.prop","slides") == "1" then
-            package_extract_dir("ultima/apps/gapps/slides", "/data");
-        endif;
-    	
-        if file_getprop("/tmp/aroma-data/gapps.prop","translate") == "1" then
-            package_extract_dir("ultima/apps/gapps/translate", "/system");
-        endif;
-
         if file_getprop("/tmp/aroma-data/gapps.prop","videos") == "1" then
             package_extract_dir("ultima/apps/gapps/videos", "/system");
         endif;
@@ -322,8 +281,17 @@ ui_print("@Installing System...");
             package_extract_dir("ultima/apps/gapps/youtube", "/system");
         endif;
 
-    	if file_getprop("/tmp/aroma-data/calendar.prop","calendar") == "yes" then
-            delete("/system/app/Calendar.apk");
+        if file_getprop("/tmp/aroma-data/gapps.prop","gallery") == "1" then
+            package_extract_dir("ultima/apps/gapps/gallery", "/system");
+            delete("/system/app/Gallery2.apk");
+        endif;
+
+        if file_getprop("/tmp/aroma-data/gapps.prop","tts") == "1" then
+            package_extract_dir("ultima/apps/gapps/tts", "/system");
+        endif;
+
+        if file_getprop("/tmp/aroma-data/gapps.prop","face") == "1" then
+            package_extract_dir("ultima/apps/gapps/face", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/chrome.prop","chrome") == "yes" then
@@ -521,6 +489,13 @@ ui_print("@Settings Permissions...");
 ##################### ROOT INSTALL ##################
 
     if file_getprop("/tmp/aroma-data/install.prop","root") == "supersu" then
+    
+        # Disable the default root package
+    	package_extract_file("ultima/scripts/disableroot.sh", "/tmp/disableroot.sh");
+        set_perm(0, 0, 0755, "/tmp/disableroot.sh");
+        run_program("/tmp/disableroot.sh");
+        delete("/tmp/disableroot.sh");
+
         ui_print("Installing SuperSU");
         package_extract_dir("ultima/root/supersu", "/system");
         symlink("/system/xbin/su", "/system/bin/su");
@@ -543,7 +518,8 @@ ui_print("@Settings Permissions...");
         run_program("/system/xbin/su", "--install");
     endif;
     if file_getprop("/tmp/aroma-data/install.prop","root") == "superuser" then
-        ui_print("Installing Superuser");        
+        ui_print("Installing Superuser");
+        # Literally do nothing, this is already installed        
     endif;
     if file_getprop("/tmp/aroma-data/install.prop","root") == "none" then
         ui_print("Disabling root");

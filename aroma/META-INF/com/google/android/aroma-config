@@ -165,12 +165,9 @@ textbox(
 			"cyan",					"Stock CyanogenMod", 	"Stock boot animation from CyanogenMod",								 			"select",
 
 			"root",					"<#selectbg_g>Root</#>","",																					"group",
-			"supersu",				"Yes",					"Chainfire's Superuser implementation",												"select.selected",
+			"supersu",				"SuperSU",				"Chainfire's Superuser implementation",												"select.selected",
+			"superuser",			"Superuser",			"Koush's CyanogenMod implementation",												"select",
 			"none",					"No",					"Do not install root",																"select",
-
-			"odex",					"<#selectbg_g>Optimisation</#>","", 																		"group",
-			"odex",					"Odex'd",				"Enable Odexed files (Optimised files. Faster system, less end-user customising) <#ff4444>(RECOMMENDED)</#>",	"select.selected",
-			"deodex",				"Deodex'd",				"Enable Deodexed files (Slower system, rasier for end user to modify files)",		"select",
 
 			"runtime",				"<#selectbg_g>Runtime</#>","", 																				"group",
 			"art",					"ART",					"Enable ART <#ff4444>(EXPERIMENTAL!! - First boot may take longer)</#>",			"select",
@@ -189,6 +186,10 @@ textbox(
 			"aosp",					"AOSP", 				"AOSP Keyboard",																		"select.selected",
 			"google",				"Google", 				"Google enhanced AOSP Keyboard",														"select",
 			"swift",				"SwiftKey", 			"Keyboard app for Android that delivers smarter autocorrect and next-word prediction",	"select",
+
+			"mms",					"<#selectbg_g>SMS/MMS</#>","",																				"group",
+			"mms_cyan",					"AOSP", 				"CyanogenMod Messaging",															"check.checked",
+			"mms_google",				"Google", 				"Google Messenger",																	"check",
 			
 			"misc",					"<#selectbg_g>Data Apps</#>","",																			"group",
 			"acdisplay",			"AcDisplay", 			"An Open Source Active Display app created by ACHep",								"check.checked",
@@ -247,14 +248,15 @@ textbox(
 
 			"gapps","<#selectbg_g>Google Apps</#>",				"",																"group",
 			"books",		"Google Books", 			"Google Books reader App",												"check.checked",
-			"calendar",		"Google Calendar", 			"Google's in-house Calendar App",										"check.checked",
+			"calendar",		"Google Calendar", 			"Google's in-house Calendar App (Replaces AOSP Gallery)",				"check.checked",
 			"chrome",		"Google Chrome", 			"Google's Chromium browser for Android",								"check.checked",
-			"docs",			"Google Docs", 				"Google's Document writing",											"check.checked",
 			"print",		"Google CloudPrint", 		"Use your printer, from anywhere in the world",							"check.checked",
-			"manager",		"Google Device Manager", 	"Remotely lock and track your lost device",								"check.checked",
 			"drive",		"Google Drive", 			"Google Docs/Drive application on the go",								"check.checked",
 			"ears",			"Google Ears", 				"Recognize music and songs playing around you",							"check.checked",
+			"earth",		"Google Earth", 			"Google Earth",															"check.checked",
+			"face",			"Google Face Unlock", 		"Android's Face unlock lockscreen",										"check.checked",
 			"games",		"Google Play Games", 		"Android's Online Gaming centre, with achievements and social",			"check.checked",
+			"gallery",		"Google Gallery", 			"Google's Gallery client (Replaces AOSP Gallery)",						"check.checked",
 			"email",		"Google Email Client", 		"Google's Email Client (Replaces AOSP EMail)",							"check.checked",
 			"mail",			"Google Mail (GMail)", 		"Google's Gmail App",													"check.checked",
 			"hangouts",		"Google Hangouts", 			"Google's SMS, MMS and IM app",											"check.checked",
@@ -262,33 +264,15 @@ textbox(
 			"maps",			"Google Maps", 				"Google's mapping and Navigation Service",								"check.checked",
 			"music",		"Google Music", 			"Play local music and Stream uploaded or bought music",					"check.checked",
 			"news",			"Google Newsstand", 		"Google News and Magazines reader app",									"check.checked",
-			"news_weather",	"Google News & Weather",	"Keep upt o date with the latest news and weather reports",				"check.checked",
+			"genie",		"Google News & Weather",	"Keep upt o date with the latest news and weather reports",				"check.checked",
 			"plus",			"Google+", 					"Google's Social Networking app",										"check.checked",
 			"office",		"Google QuickOffice", 		"A powerful and fully featured office app",								"check.checked",
-			"sheets",		"Google Sheets", 			"Create and edit spreadsheets",											"check.checked",
-			"slides",		"Google Slides", 			"Create and edit slidehows",											"check.checked",
-			"translate",	"Google Translate", 		"Translate languages from around the world",							"check.checked",
 			"videos",		"Google Videos", 			"Google Movie rentals and purchasing",									"check.checked",
-			"voice",		"Google Voice Search", 		"Search without a keyboard",											"check.checked",
 			"wallet",		"Google Wallet", 			"Google Wallet, for contact-less payments (USA Only)",					"check.checked",
+			"tts",			"Google TTS", 				"Google Text-To-Speech synthesizer",									"check.checked",
 			"youtube",		"Google YouTube", 			"Google's Popular Video Streaming Service",								"check.checked"
 		);
 
-			
-			if file_getprop("/tmp/aroma-data/gapps.prop","calendar") == "1" then					
-			form(
-				"Calendar",
-				"Remove?",
-				"@calendar",
-				"calendar.prop",
-
-				"calendar",		"<#selectbg_g>Would you like to remove the AOSP App?</#>",			"",		"group",
-				"yes",					"Yes", 			"Remove the AOSP Calendar",									"select.selected",
-				"no",					"No", 			"Keep both the AOSP app and the Google app",				"select"
-			);
-		  else
-			  writetmpfile("calendar.prop","calendar=no\n");
-		  endif;
 
 		  if file_getprop("/tmp/aroma-data/gapps.prop","chrome") == "1" then
 		  form(

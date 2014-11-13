@@ -9,7 +9,7 @@ ULTIMAMOD_UPDATE_URL=http://www.ultimarom.com/rom/update/update_manifest.xml
 
 AND_BUILD_NUMBER=KTU84P
 
-DISTTYPE=user
+DISTTYPE=userdebug
 DEVICE=
 VENDOR=vendor/ultimamod
 SEVENZIP=$VENDOR/tools/7za
@@ -19,7 +19,7 @@ TYPE=
 
 buildROM () { 
     runLunch
-    brunch cm_"$DEVICE"-user
+    brunch "$DEVICE"
     repackROM ;
 }
 
@@ -42,7 +42,6 @@ repackROM () {
     # Delete some unnecessary files
     rm -rf "$OUTMOD"/META-INF "$OUTMOD"/recovery
     rm -f "$OUTMOD"/system/priv-app/CMUpdater.apk
-    rm -f "$OUTMOD"/system/priv-app/CMUpdater.odex
 
     echo "Copying UltimaMod files"
 
@@ -63,25 +62,20 @@ repackROM () {
     mv "$OUTMOD"/system/app/PhotoPhase.apk "$OUTMOD"/ultima/live_wallpapers/photophase/app
     mv "$OUTMOD"/system/app/SunBeam.apk "$OUTMOD"/ultima/live_wallpapers/sunbeam/app
     mv "$OUTMOD"/system/app/HoloSpiralWallpaper.apk "$OUTMOD"/ultima/live_wallpapers/holo_spiral/app
-
-    mv "$OUTMOD"/system/app/MagicSmokeWallpapers.odex "$OUTMOD"/ultima/live_wallpapers/magic_smoke/app
-    mv "$OUTMOD"/system/app/NoiseField.odex "$OUTMOD"/ultima/live_wallpapers/bubbles/app
-    mv "$OUTMOD"/system/app/PhaseBeam.odex "$OUTMOD"/ultima/live_wallpapers/phasebeam/app
-    mv "$OUTMOD"/system/app/PhotoPhase.odex "$OUTMOD"/ultima/live_wallpapers/photophase/app
-    mv "$OUTMOD"/system/app/SunBeam.odex "$OUTMOD"/ultima/live_wallpapers/sunbeam/app
-    mv "$OUTMOD"/system/app/HoloSpiralWallpaper.odex "$OUTMOD"/ultima/live_wallpapers/holo_spiral/app
     
     ## Keyboards
     mkdir -p "$OUTMOD"/ultima/keyboards/aosp/app "$OUTMOD"/ultima/keyboards/aosp/lib
     mv "$OUTMOD"/system/app/LatinIME.apk "$OUTMOD"/ultima/keyboards/aosp/app
-    mv "$OUTMOD"/system/app/LatinIME.odex "$OUTMOD"/ultima/keyboards/aosp/app
     mv "$OUTMOD"/system/lib/libjni_latinime.so "$OUTMOD"/ultima/keyboards/aosp/lib
 
     ## Camera
     mkdir -p "$OUTMOD"/ultima/camera/aosp/app "$OUTMOD"/ultima/camera/aosp/lib
     mv "$OUTMOD"/system/app/Camera2.apk "$OUTMOD"/ultima/camera/aosp/app
-    mv "$OUTMOD"/system/app/Camera2.odex "$OUTMOD"/ultima/camera/aosp/app
     mv "$OUTMOD"/system/lib/libjni_mosaic.so "$OUTMOD"/ultima/camera/aosp/lib
+
+    ## Messaging
+    mkdir -p "$OUTMOD"/ultima/messaging/cyan/priv-app
+    mv "$OUTMOD"/system/priv-app/Mms.apk "$OUTMOD"/ultima/camera/aosp/priv-app
 
     ## Boot animation
     mkdir -p "$OUTMOD"/ultima/bootanimation/cyan
@@ -164,6 +158,11 @@ repackROM () {
     cp -R "$VENDOR"/prebuilt/common/ultimamod "$OUTMOD"/system/ultimamod
     cp "$VENDOR"/prebuilt/common/xbin/ARCHIDROID_INIT "$OUTMOD"/system/xbin/ARCHIDROID_INIT
     cp "$VENDOR"/prebuilt/common/etc/init.d/00ARCHIDROID_INITD "$OUTMOD"/system/etc/init.d/00ARCHIDROID_INITD
+    mkdir -p "$OUTMOD"/system/ultimamod/tmpfs
+    touch "$OUTMOD"/system/ultimamod/tmpfs/.placeholder
+
+    ## IOTOP
+    wget -q -O "$OUTMOD"/system/bin/iotop https://raw.githubusercontent.com/laufersteppenwolf/iotop/master/iotop.sh
 
     # Zip back up
     if [ -e "$ZIPNAME" ]; then
@@ -171,10 +170,10 @@ repackROM () {
     fi
 
     ## Move Odex files
-    mkdir -p "$OUTMOD"/ultima/odex/app "$OUTMOD"/ultima/odex/priv-app "$OUTMOD"/ultima/odex/framework
-    find "$OUTMOD"/system/app/* -name "*.odex" -exec mv -t "$OUTMOD"/ultima/odex/app {} +
-    find "$OUTMOD"/system/priv-app/* -name "*.odex" -exec mv -t "$OUTMOD"/ultima/odex/priv-app {} +
-    find "$OUTMOD"/system/framework/* -name "*.odex" -exec mv -t "$OUTMOD"/ultima/odex/framework {} +
+    #mkdir -p "$OUTMOD"/ultima/odex/app "$OUTMOD"/ultima/odex/priv-app "$OUTMOD"/ultima/odex/framework
+    #find "$OUTMOD"/system/app/* -name "*.odex" -exec mv -t "$OUTMOD"/ultima/odex/app {} +
+    #find "$OUTMOD"/system/priv-app/* -name "*.odex" -exec mv -t "$OUTMOD"/ultima/odex/priv-app {} +
+    #find "$OUTMOD"/system/framework/* -name "*.odex" -exec mv -t "$OUTMOD"/ultima/odex/framework {} +
 
     echo "Creating ROM zip"
     $SEVENZIP a -r -mx9 -tzip "$ZIPNAME" ./"$OUTMOD"/* > /dev/null
@@ -186,7 +185,7 @@ repackROM () {
 
 runLunch() {
     # Lunch using our selection
-    breakfast cm_"$DEVICE"-user > /dev/null
+    breakfast "$DEVICE" > /dev/null
 
     # UltimaMod variables
     OUTFOLDER=out/target/product/$DEVICE
@@ -194,8 +193,8 @@ runLunch() {
     ZIPNAME=UltimaMod-${ULTIMAMOD_BUILD_VERSION}-v${ULTIMAMOD_VERSION_MAJOR}.${ULTIMAMOD_VERSION_MINOR}-${DEVICE}.zip
 
     # Delete the any existing ones, so that if the build fails, so does the repack
-    if [ -e "$OUTZIP" ]; then
-        rm -rf "$OUTZIP"
+    if [ -e "$ZIPNAME" ]; then
+        rm -rf "$ZIPNAME"
     fi
 }
 
@@ -226,7 +225,7 @@ repoSync(){
 }
 
 makeclean(){
-    rm -rf ~/.ccache
+    rm -rf ~/mnt/Phone/.ccache
     make clean
     echo " "
     echo " "
@@ -272,6 +271,13 @@ echo " "
 echo -e "\e[1;91mWelcome to the $ULTIMAMOD_ROMNAME ${ULTIMAMOD_VERSION_MAJOR}.${ULTIMAMOD_VERSION_MINOR} $ULTIMAMOD_BUILD_VERSION build script"
 echo -e "\e[0m "
 . build/envsetup.sh > /dev/null
+# Check that UltimaMod roomservice.xml is installed
+if[ -e .repo/local_manifests/ultima_roomservice.xml ]; then
+    # It's installed, good
+else
+    # Not installed, so install it now
+    cp vendor/ultimamod/ultima_roomservice.xml .repo/local_manifests/ultima_roomservice.xml
+fi
 echo "Please make your selections carefully"
 echo " "
 echo " "
@@ -281,7 +287,8 @@ select build in "build" "repack" "sync" "clean"; do
         build ) create 1; break;;
         repack )  create 2; break;;
         sync ) repoSync; break;;
-        clean ) makeclean; break ;;
+        clean ) make clean; break ;;
+        cleanfully ) makeclean; break;;
     esac
 done
 
