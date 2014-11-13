@@ -1,9 +1,13 @@
 <b><#selectbg_g>UltimaMod - v2.0.1 Folkvangr</#></b>
-<*>Updated to latest CyanogenMod sources</*>
+<*>Updated to latest CyanogenMod sources as of build date</*>
 <*>Updated Gapps to latest, including Play Store and GSF</*>
+<*>Added Google Gallery, TTS, Face Unlock and Messenger</*>
+<*>Removed Google Sheets, Slides, Translate and Device Manager (all are not usual GApps packages)</*>
 <*>Updated Misc Apps (Dropbox, SwiftKey, etc)</*>
-<*>Updated SuperSU to 2.14</*>
+<*>Updated SuperSU to 2.16</*>
 <*>Fixed factory reset installer option</*>
+<*>Fixed i9505 camera and media recording/codec issues</*>
+<*>Had to remove Odex option as it was breaking the i9505 build (CyanogenMod have been made aware of this)</*>
 
 <b><#selectbg_g>UltimaMod - v2.0 Folkvangr</#></b>
 <*>Rebranded to UltimaMod (Ultima CyanogenMOD) </*>

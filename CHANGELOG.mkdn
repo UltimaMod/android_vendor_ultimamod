@@ -8,11 +8,15 @@ Visit http://ultimarom.com for downloads, information and themed Google apps pac
 CHANGELOG 
 ---------
 ### UltimaMod - v2.0.1 Folkvangr
-* Updated to latest CyanogenMod sources (various fixes, of course)
+* Updated to latest CyanogenMod sources as of build date
 * Updated Gapps to latest, including Play Store and GSF
+* Added Google Gallery, TTS, Face Unlock and Messenger
+* Removed Google Sheets, Slides, Translate and Device Manager (all are not usual GApps packages)
 * Updated Misc Apps (Dropbox, SwiftKey, etc)
-* Updated SuperSU to 2.14
+* Updated SuperSU to 2.16
 * Fixed factory reset installer option
+* Fixed i9505 camera and media recording/codec issues
+* Had to remove Odex option as it was breaking the i9505 build (CyanogenMod have been made aware of this)
 
 ### UltimaMod - v2.0 Folkvangr
 * Changed base to CyanogenMod 11 (latest sources as of build time) - Should make for quicker updates
