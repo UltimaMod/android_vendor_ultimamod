@@ -3,7 +3,8 @@
 <*>Updated Gapps to latest, including Play Store and GSF</*>
 <*>Added Google Gallery, TTS, Face Unlock and Messenger</*>
 <*>Removed Google Sheets, Slides, Translate and Device Manager (all are not usual GApps packages)</*>
-<*>Updated Misc Apps (Dropbox, SwiftKey, etc)</*>
+<*>Updated Misc Apps (SwiftKey, etc)</*>
+<*>Dropbox suggesting there isn't enough room on the device. Their error. Removed until they fix this</*>
 <*>Updated SuperSU to 2.16</*>
 <*>Fixed factory reset installer option</*>
 <*>Fixed i9505 camera and media recording/codec issues</*>

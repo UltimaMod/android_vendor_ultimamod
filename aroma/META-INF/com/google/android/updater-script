@@ -169,12 +169,7 @@ ui_print("@Installing System...");
         ui_print("Installing DisconnectMobile");
         package_extract_dir("ultima/apps/misc/disconnect", "/system");
     endif;
-	
-	if file_getprop("/tmp/aroma-data/install.prop","dropbox") == "1" then
-		ui_print("Installing Dropbox");
-        package_extract_dir("ultima/apps/misc/dropbox", "/data");
-    endif;
-	
+
 	 if file_getprop("/tmp/aroma-data/install.prop","fastergps") == "1" then
 		ui_print("Installing FasterGPS");
         package_extract_dir("ultima/apps/misc/fastergps", "/data");
@@ -213,7 +208,7 @@ ui_print("@Installing System...");
         endif;
     	
         if file_getprop("/tmp/aroma-data/gapps.prop","drive") == "1" then
-            package_extract_dir("ultima/apps/gapps/drive", "/data");
+            package_extract_dir("ultima/apps/gapps/drive", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","ears") == "1" then
@@ -221,7 +216,7 @@ ui_print("@Installing System...");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","games") == "1" then
-            package_extract_dir("ultima/apps/gapps/games", "/data");
+            package_extract_dir("ultima/apps/gapps/games", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","email") == "1" then
@@ -258,7 +253,7 @@ ui_print("@Installing System...");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","plus") == "1" then
-            package_extract_dir("ultima/apps/gapps/plus", "/data");
+            package_extract_dir("ultima/apps/gapps/plus", "/system");
         endif;
 
         if file_getprop("/tmp/aroma-data/gapps.prop","office") == "1" then

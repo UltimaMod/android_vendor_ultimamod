@@ -136,19 +136,6 @@ textbox(
 		"everything",			"Everything", 			"Wipe everything on the data partition, including the internal storage (extSdCard is not touched)",					"select",
 		"nothing",				"Nothing", 				"Wipe just /system. Same as a 'dirty' flash (useful for upgrading)",												"select"
 	);
-
-## Install presets
-#	form(
-#		"Wiping Data",
-#		"Decide whether to wipe data or not",
-#		"@alert",
-#		"wipe.prop",
-#
-#		"wipe",					"<#selectbg_g>Please Choose a wiping method</#>",				"",																			"group",
-#		"factory",				"Factory Reset", 		"Wipe everything on the data partition, except /data/media (the internal storage) <#ff4444>(RECOMMENDED)</#>",		"select.selected",
-#		"everything",			"Everything", 			"Wipe everything on the data partition, including the internal storage (extSdCard is not touched)",					"select",
-#		"nothing",				"Nothing", 				"Wipe just /system. Same as a 'dirty' flash (useful for upgrading)",												"select"
-#	);
 		
 	  #-------------------------+-----------------[     Install Data     ]----------------+---------------#
 	  #-------------------------+---------------------------------------------------------+---------------#
@@ -160,9 +147,9 @@ textbox(
 			"install.prop",
 			
 			"bootanimation",		"<#selectbg_g>Boot Animation</#>","",																		"group",
-			"new",					"Android L", 			"The new stock Google boot animation from the Android Developer Preview L <#ff4444>(RECOMMENDED)</#>",		    "select.selected",
-			"old",					"Stock Google", 		"Stock boot animation from Nexus and GPe devices",								 	"select",
-			"cyan",					"Stock CyanogenMod", 	"Stock boot animation from CyanogenMod",								 			"select",
+			"new",					"Lollipop", 			"Stock boot animation from Google Lollipop <#ff4444>(RECOMMENDED)</#>",		    	"select.selected",
+			"old",					"Kitkat", 				"Stock boot animation from Google Kitkat",								 			"select",
+			"cyan",					"CyanogenMod", 			"Stock boot animation from CyanogenMod",								 			"select",
 
 			"root",					"<#selectbg_g>Root</#>","",																					"group",
 			"supersu",				"SuperSU",				"Chainfire's Superuser implementation",												"select.selected",
@@ -170,7 +157,7 @@ textbox(
 			"none",					"No",					"Do not install root",																"select",
 
 			"runtime",				"<#selectbg_g>Runtime</#>","", 																				"group",
-			"art",					"ART",					"Enable ART <#ff4444>(EXPERIMENTAL!! - First boot may take longer)</#>",			"select",
+			"art",					"ART",					"Enable ART <#ff4444>(EXPERIMENTAL!! - First boot will take longer)</#>",			"select",
 			"dalvik",				"Dalvik",				"Enable Dalvik",																	"select.selected",
 			
 			"launcher",				"<#selectbg_g>Launchers</#>","",																			"group",
@@ -182,20 +169,19 @@ textbox(
 			"camera_aosp",			"Stock", 				"CyanogenMod AOSP camera <#ff4444>(RECOMMENDED)</#>",								"check.checked",
 			"camera_google",		"Google", 				"Google's Camera software from the Nexus line",										"check",
 			
-			"keyboards",			"<#selectbg_g>Keyboards</#>","",																				"group",
-			"aosp",					"AOSP", 				"AOSP Keyboard",																		"select.selected",
-			"google",				"Google", 				"Google enhanced AOSP Keyboard",														"select",
-			"swift",				"SwiftKey", 			"Keyboard app for Android that delivers smarter autocorrect and next-word prediction",	"select",
+			"keyboards",			"<#selectbg_g>Keyboards</#>","",																			"group",
+			"aosp",					"AOSP", 				"AOSP Keyboard",																	"select.selected",
+			"google",				"Google", 				"Google enhanced AOSP Keyboard",													"select",
+			"swift",				"SwiftKey", 			"Keyboard app for Android that delivers autocorrect and next-word prediction",		"select",
 
 			"mms",					"<#selectbg_g>SMS/MMS</#>","",																				"group",
-			"mms_cyan",					"AOSP", 				"CyanogenMod Messaging",															"check.checked",
-			"mms_google",				"Google", 				"Google Messenger",																	"check",
+			"mms_cyan",				"AOSP", 				"CyanogenMod Messaging",															"check.checked",
+			"mms_google",			"Google", 				"Google Messenger",																	"check",
 			
 			"misc",					"<#selectbg_g>Data Apps</#>","",																			"group",
 			"acdisplay",			"AcDisplay", 			"An Open Source Active Display app created by ACHep",								"check.checked",
 			"adaway",				"AdAway", 				"Open Source Ad blocking via the HOSTS file",										"check.checked",
 			"disconnect",			"DisconnectMobile",		"Block Malvertising ads and protect your identity online",							"check.checked",
-			"dropbox",				"Dropbox", 				"Sync and backup your phones pictures and videos",									"check.checked",
 			"fastergps",			"FasterGPS", 			"Help locate your GPS signal quicker by preselecting your country (Open Source)",	"check.checked",
 			"terminal",				"Terminal", 			"Android Terminal Emulator (Open Source)",											"check.checked",
 			
@@ -247,7 +233,7 @@ textbox(
 
 			"gapps","<#selectbg_g>Google Apps</#>",				"",																"group",
 			"books",		"Google Books", 			"Google Books reader App",												"check.checked",
-			"calendar",		"Google Calendar", 			"Google's in-house Calendar App (Replaces AOSP Gallery)",				"check.checked",
+			"calendar",		"Google Calendar", 			"Google's in-house Calendar App (Replaces AOSP Calendar)",				"check.checked",
 			"chrome",		"Google Chrome", 			"Google's Chromium browser for Android",								"check.checked",
 			"print",		"Google CloudPrint", 		"Use your printer, from anywhere in the world",							"check.checked",
 			"drive",		"Google Drive", 			"Google Docs/Drive application on the go",								"check.checked",
@@ -263,8 +249,8 @@ textbox(
 			"maps",			"Google Maps", 				"Google's mapping and Navigation Service",								"check.checked",
 			"music",		"Google Music", 			"Play local music and Stream uploaded or bought music",					"check.checked",
 			"news",			"Google Newsstand", 		"Google News and Magazines reader app",									"check.checked",
-			"genie",		"Google News & Weather",	"Keep upt o date with the latest news and weather reports",				"check.checked",
-			"plus",			"Google+", 					"Google's Social Networking app",										"check.checked",
+			"genie",		"Google News & Weather",	"Keep up to date with the latest news and weather reports",				"check.checked",
+			"plus",			"Google Plus", 				"Google's Social Networking app",										"check.checked",
 			"office",		"Google QuickOffice", 		"A powerful and fully featured office app",								"check.checked",
 			"videos",		"Google Videos", 			"Google Movie rentals and purchasing",									"check.checked",
 			"wallet",		"Google Wallet", 			"Google Wallet, for contact-less payments (USA Only)",					"check.checked",

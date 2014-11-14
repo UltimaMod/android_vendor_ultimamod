@@ -5,6 +5,8 @@
            fetch="https://github.com"
            revision="cm-11.0" />
 
+    <remote name="fdroid" fetch="https://git.gitorious.org/f-droid" />
+
 	<!-- Samsung propriatory blobs -->
   	<project name="TheMuppets/proprietary_vendor_samsung" path="vendor/samsung" remote="ultimamod" />
 
