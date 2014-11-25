@@ -17,6 +17,17 @@ NOW=$(date +"%Y%m%d")
 CMVER=11
 TYPE=
 
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+if ([ -h "${SCRIPT_PATH}" ]) then
+  while([ -h "${SCRIPT_PATH}" ]) do SCRIPT_PATH=`readlink "${SCRIPT_PATH}"`; done
+fi
+pushd . > /dev/null
+cd `dirname ${SCRIPT_PATH}` > /dev/null
+SCRIPT_PATH=`pwd`;
+popd  > /dev/null
+
+TOOLS_DIR="$SCRIPT_PATH"/vendor/ultimamod/tools
+
 buildROM () { 
     runLunch
     brunch "$DEVICE"
@@ -75,7 +86,7 @@ repackROM () {
 
     ## Messaging
     mkdir -p "$OUTMOD"/ultima/messaging/cyan/priv-app
-    mv "$OUTMOD"/system/priv-app/Mms.apk "$OUTMOD"/ultima/camera/aosp/priv-app
+    mv "$OUTMOD"/system/priv-app/Mms.apk "$OUTMOD"/ultima/messaging/cyan/priv-app
 
     ## Boot animation
     mkdir -p "$OUTMOD"/ultima/bootanimation/cyan
@@ -272,13 +283,9 @@ echo -e "\e[1;91mWelcome to the $ULTIMAMOD_ROMNAME ${ULTIMAMOD_VERSION_MAJOR}.${
 echo -e "\e[0m "
 . build/envsetup.sh > /dev/null
 # Check that UltimaMod roomservice.xml is installed
-if [ -e .repo/local_manifests/ultima_roomservice.xml ]; then
-    # It's installed, good
-    echo "Ok" > /dev/null
-else
-    # Not installed, so install it now
-    cp vendor/ultimamod/ultima_roomservice.xml .repo/local_manifests/ultima_roomservice.xml
-fi
+## Install it anyway, because there might have been changes to it.
+cp vendor/ultimamod/ultima_roomservice.xml .repo/local_manifests/ultima_roomservice.xml
+
 echo "Please make your selections carefully"
 echo " "
 echo " "
