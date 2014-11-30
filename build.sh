@@ -1,12 +1,5 @@
 #! /bin/bash
 
-# UltimaMod Variables
-ULTIMAMOD_ROMNAME=UltimaMod
-ULTIMAMOD_BUILD_VERSION=Folkvangr
-ULTIMAMOD_VERSION_MAJOR=2
-ULTIMAMOD_VERSION_MINOR=0.1
-ULTIMAMOD_UPDATE_URL=http://www.ultimarom.com/rom/update/update_manifest.xml
-
 AND_BUILD_NUMBER=KTU84P
 
 DISTTYPE=userdebug
@@ -148,6 +141,14 @@ repackROM () {
     sed -i "s/ro.cm.display.version=.*$DEVICE//g" "$FILE"
     sed -i "s/ro.build.display.id=.*/ro.build.display.id=${AND_BUILD_NUMBER}/g" "$FILE"
     sed -i "s/ro.com.android.dateformat=MM-dd-yyyy/ro.com.android.dateformat=dd-MM-yyyy/g" "$FILE"
+
+    # UltimaMod Variables
+    ULTIMAMOD_ROMNAME=UltimaMod
+    ULTIMAMOD_BUILD_VERSION=Folkvangr
+    ULTIMAMOD_VERSION_MAJOR=2
+    ULTIMAMOD_VERSION_MINOR=0.1
+    ULTIMAMOD_UPDATE_URL=http://www.ultimarom.com/rom/update/ultimamod/"$DEVICE"/update_manifest.xml
+
     echo " " >> "$FILE"
     echo "# UltimaMod" >> "$FILE"
     echo "ro.ua.romname=${ULTIMAMOD_ROMNAME}" >> "$FILE"
@@ -161,7 +162,7 @@ repackROM () {
     echo "ro.ota.version=${ULTIMAMOD_VERSION_MAJOR}.${ULTIMAMOD_VERSION_MINOR}" >> "$FILE"
     echo "ro.ota.codename=${ULTIMAMOD_BUILD_VERSION}" >> "$FILE"
     echo "ro.ota.device=${DEVICE}" >> "$FILE"
-    echo "ro.ota.manifest= ${ULTIMAMOD_UPDATE_URL}" >> "$FILE"
+    echo "ro.ota.manifest=${ULTIMAMOD_UPDATE_URL}" >> "$FILE"
 
     ## ArchiDroid INIT and debuggerd
     mv "$OUTMOD"/system/bin/debuggerd "$OUTMOD"/system/bin/debuggerd.real
@@ -174,6 +175,11 @@ repackROM () {
 
     ## IOTOP
     wget -q -O "$OUTMOD"/system/bin/iotop https://raw.githubusercontent.com/laufersteppenwolf/iotop/master/iotop.sh
+
+    ## i9505 offline time fix
+    if [ "$DEVICE" == "jflte" ]; then
+    	mv "$OUTMOD"/system/bin/time_daemon "$OUTMOD"/system/bin/time_daemon.bak
+    fi
 
     # Zip back up
     if [ -e "$ZIPNAME" ]; then
